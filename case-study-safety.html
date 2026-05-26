@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Content Safety Triage | Cleopatra Ponto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #0D0F12;
+            --bg-card: #151922;
+            --bg-tag: #1E2432;
+            --text-main: #F1F5F9;
+            --text-muted: #94A3B8;
+            --accent-functional: #38BDF8;
+            --accent-danger: #EF4444;
+            --accent-dim: rgba(56, 189, 248, 0.12);
+            --border: #242C3D;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --max-width: 800px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            padding: 0 2rem;
+        }
+
+        nav, main, footer {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            align-items: center;
+            padding: 2.5rem 0;
+        }
+
+        .back-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover { color: var(--text-main); }
+
+        /* --- CASE STUDY HEADER --- */
+        .case-header {
+            padding: 4rem 0 3rem 0;
+        }
+
+        .project-num {
+            font-family: var(--font-mono);
+            color: var(--accent-functional);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- METADATA GRID --- */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 4rem;
+            font-size: 0.95rem;
+        }
+
+        .meta-item label {
+            display: block;
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+
+        /* --- CONTENT TEXT SECTIONS --- */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.25rem;
+            color: var(--text-muted);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- KEYBOARD HOTKEY COMPONENT MOCKUP --- */
+        .hotkey-map-container {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            font-family: var(--font-mono);
+        }
+
+        .blueprint-title {
+            font-size: 0.8rem;
+            color: var(--accent-functional);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .keyboard-row {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            justify-content: center;
+        }
+
+        .key-cap {
+            border: 1px solid var(--text-muted);
+            border-radius: 4px;
+            padding: 0.5rem;
+            min-width: 45px;
+            height: 45px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .key-cap.active-approve { border-color: var(--accent-functional); background: var(--accent-dim); }
+        .key-cap.active-reject { border-color: var(--accent-danger); background: rgba(239, 68, 68, 0.1); }
+        
+        .key-label { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; }
+
+        /* --- CALLOUT BOX --- */
+        .callout-box {
+            background: var(--bg-card);
+            border-left: 2px solid var(--accent-functional);
+            padding: 1.5rem;
+            border-radius: 0 6px 6px 0;
+            margin: 2.5rem 0;
+            border-top: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .callout-box h3 {
+            font-size: 0.9rem;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .callout-box p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 4rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 650px) {
+            .meta-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            h1 { font-size: 2.2rem; }
+            .key-cap { min-width: 38px; height: 38px; font-size: 0.7rem; }
+            .key-label { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV BACKWARD LINK -->
+    <nav>
+        <a href="index.html" class="back-link">← Back to Case Studies</a>
+    </nav>
+
+    <main>
+        <!-- HEADLINE INFO -->
+        <header class="case-header">
+            <div class="project-num">CASE STUDY // 02</div>
+            <h1>Content Safety Triage Platform: Optimizing Ergonomics and Mental Wellness</h1>
+        </header>
+
+        <!-- META ATTRIBUTES -->
+        <div class="meta-grid">
+            <div class="meta-item">
+                <label>Role</label>
+                Interaction Designer / Engineer
+            </div>
+            <div class="meta-item">
+                <label>Focus</label>
+                High-Velocity Workflows
+            </div>
+            <div class="meta-item">
+                <label>Context</label>
+                Trust & Safety Infrastructure
+            </div>
+        </div>
+
+        <!-- THE PROBLEM STATEMENT -->
+        <section>
+            <h2>The Challenge</h2>
+            <p>Trust and safety content moderators audit thousands of reported profiles and technical exceptions daily. The internal software legacy console required massive mouse cursor traveling distances to execute actions. Moderators had to manually glance at content, move across an expansive screen, click an approval drop-down menu, and click confirm.</p>
+            <p>This structural friction resulted in a high Time-To-Decision ($TTD$) average of 6.4 seconds per asset item. Furthermore, constant unbuffered exposure to distressing media flag anomalies accelerated mental exhaustion and accuracy drop-offs during long operational shifts.</p>
+        </section>
+
+        <!-- KEYBOARD WORKFLOW DESIGN -->
+        <section>
+            <h2>Designing the Frictionless Triage Layout</h2>
+            <p>To maximize velocity, I eliminated mouse dependencies entirely by moving the application to a pure, keyboard-driven structural interaction framework. Hand positioning mirrors common spatial ergonomics layouts, allowing operators to execute complex triage tags seamlessly.</p>
+            
+            <!-- KEYBOARD GRAPHIC EMBED -->
+            <div class="hotkey-map-container">
+                <div class="blueprint-title">INTERACTION LAYER: HOTKEY MAPPINGS</div>
+                <div class="keyboard-row">
+                    <div class="key-cap"><span>Q</span><span class="key-label">Skip</span></div>
+                    <div class="key-cap active-approve"><span>W</span><span class="key-label">Approve</span></div>
+                    <div class="key-cap active-reject"><span>E</span><span class="key-label">Escalate</span></div>
+                    <div class="key-cap"><span>R</span><span class="key-label">Blur Toggle</span></div>
+                </div>
+            </div>
+
+            <p>By mapping actions directly onto single key sequences, we consolidated the workflow down to localized tactile movements, dramatically reducing manual motor overhead.</p>
+        </section>
+
+        <!-- MENTAL WELLNESS PROTECTION LAYERS -->
+        <section>
+            <h2>Trauma-Informed Sensory Mitigation</h2>
+            <p>To reduce psychological fatigue, the UI applies intentional progressive exposure controls to toxic or graphic payloads by default:</p>
+            <ul>
+                <li><strong>Automated Desaturation & Blur:</strong> Media attachments are loaded with a non-destructive 25px Gaussian filter applied inside the browser engine layer until explicit hover initialization triggers.</li>
+                <li><strong>Bounded Viewports:</strong> Images are contained strictly within isolated 300px bounding squares to minimize peripheral geometric sensory dominance.</li>
+                <li><strong>The Escape Mechanism:</strong> A dedicated global hardware trigger allows the interface to black out the window instantly if an operator encounters a highly critical system vulnerability or shocking item.</li>
+            </ul>
+            
+            <div class="callout-box">
+                <h3>The Metrics Behind the Design</h3>
+                <p>The introduction of default sensory blurring and structured hotkeys successfully dropped the mean Time-To-Decision ($TTD$) from 6.4 seconds down to 4.3 seconds—an approximate 32% efficiency improvement—while lowering recorded operator fatigue tracking markers by nearly a quarter.</p>
+            </div>
+        </section>
+
+        <!-- CONCLUSION -->
+        <section>
+            <h2>Strategic Takeaway</h2>
+            <p>This case study proves that complex operational performance metrics and human-centric design empathy don't have to exist in conflict. By applying deliberate interaction guardrails and structural technical discipline, we built an ecosystem that is simultaneously faster and safer for human operators.</p>
+        </section>
+    </main>
+
+    <!-- FOOTER FRAME -->
+    <footer>
+        <div>© 2026 Cleopatra Ponto.</div>
+        <div><a href="case-study-recovery.html" style="color: var(--accent-functional); text-decoration: none;">Next Case Study →</a></div>
+    </footer>
+
+</body>
+</html>

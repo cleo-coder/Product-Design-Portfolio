@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleopatra Ponto | Product Engineer & UI/UX Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Wabi-Sabi Minimalist Technical Palette */
+            --bg-main: #0D0F12;
+            --bg-card: #151922;
+            --bg-tag: #1E2432;
+            --text-main: #F1F5F9;
+            --text-muted: #94A3B8;
+            --accent: #E2E8F0; /* Clean light sand/slate */
+            --accent-functional: #38BDF8; /* Data accent */
+            --accent-dim: rgba(56, 189, 248, 0.12);
+            --border: #242C3D;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --max-width: 1100px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            padding: 0 2rem;
+        }
+
+        header, main, footer {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: var(--font-mono);
+            font-weight: 500;
+            font-size: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span { color: var(--text-muted); }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            margin-left: 2rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover { color: var(--text-main); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 7rem 0 5rem 0;
+        }
+
+        .hero-tag {
+            font-family: var(--font-mono);
+            color: var(--accent-functional);
+            background: var(--accent-dim);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            max-width: 850px;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+        }
+
+        /* --- PROJECTS SECTION --- */
+        .section-title {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .project-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 6rem;
+            padding-bottom: 8rem;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4.5rem;
+            align-items: start;
+        }
+
+        /* Visual Shell Component */
+        .project-visual {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            aspect-ratio: 16/11;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Embedded Dynamic UI Mockups */
+        .fake-ui-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+        .fake-dot-group { display: flex; gap: 6px; }
+        .fake-dot { width: 8px; height: 8px; background: var(--border); border-radius: 50%; }
+        .fake-dot.active { background: var(--accent-functional); }
+        .fake-ui-body {
+            flex-grow: 1;
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            gap: 1.5rem;
+            margin-top: 1.25rem;
+        }
+        .fake-sidebar { border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 12px; padding-right: 1rem; }
+        .fake-main-panel { display: grid; grid-template-rows: 1.2fr 1fr; gap: 1rem; }
+        .fake-chart-bar { height: 100%; background: linear-gradient(180deg, var(--accent-dim) 0%, transparent 100%); border: 1px dashed rgba(56, 189, 248, 0.4); border-radius: 6px; position: relative;}
+        .fake-chart-bar::before { content: "GRID_NODE_LIVE"; font-family: var(--font-mono); font-size: 9px; color: var(--accent-functional); position: absolute; top: 12px; left: 12px; letter-spacing: 1px;}
+        .fake-line { height: 6px; background: var(--border); border-radius: 3px; width: 80%; }
+        
+        /* Content Panel Layout */
+        .project-meta {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-functional);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .project-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            margin-bottom: 1.75rem;
+            font-size: 1.05rem;
+        }
+
+        .ux-metrics-box {
+            background: rgba(21, 25, 34, 0.6);
+            border-left: 2px solid var(--accent-functional);
+            padding: 1.25rem;
+            margin-bottom: 1.75rem;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .ux-metrics-box strong {
+            display: block;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.5px;
+        }
+        .ux-metrics-box p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            font-family: var(--font-mono);
+            background-color: var(--bg-tag);
+            color: var(--text-main);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            border: 1px solid var(--border);
+        }
+
+        .view-case-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: gap 0.2s ease;
+        }
+        .view-case-link:hover {
+            gap: 0.8rem;
+            color: var(--accent-functional);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* --- RESPONSIVE LAYOUTS --- */
+        @media (max-width: 950px) {
+            .project-card {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            h1 { font-size: 2.4rem; }
+            body { padding: 0 1.5rem; }
+            .hero { padding: 5rem 0 3rem 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV FRAMEWORK -->
+    <nav>
+        <div class="logo">CLEOPATRA PONTO<span> // PRODUCT ENGINEER</span></div>
+        <div class="nav-links">
+            <a href="#work">Case Studies</a>
+            <a href="#connect" style="margin-left: 1.5rem; color: var(--accent-functional);">Connect</a>
+        </div>
+    </nav>
+
+    <!-- PROFESSIONAL HERO -->
+    <header class="hero">
+        <div class="hero-tag">Available for Remote Roles</div>
+        <h1>I bridge the gap between technical data systems and elegant, human interaction.</h1>
+        <p>Full-stack developer focused on design systems, modular dashboard analytics, and intentional, data-dense interfaces. Balancing structural integrity with minimalist user clarity.</p>
+    </header>
+<!-- ========================================== -->
+    <!-- INTERACTIVE LAYOUT SANDBOX START          -->
+    <!-- ========================================== -->
+   <section class="interactive-explorer-section" style="padding: 2.5rem 0; font-family: sans-serif;">
+    <div class="interactive-layout-container" style="background: #090b0c; border: 1px solid #1c2022; border-radius: 12px; padding: 2rem; color: #f4f5f3; box-shadow: 0 30px 60px rgba(0,0,0,0.6);">
+        
+        <div style="font-size: 0.65rem; color: #526065; letter-spacing: 1.5px; margin-bottom: 0.5rem; font-family: 'JetBrains Mono', monospace;">INTERACTIVE LAYOUT EXPLORER</div>
+        <p style="color: #9ca3af; font-size: 0.85rem; margin-bottom: 2rem; max-width: 600px;">
+            Recruiters: Select a project framework below to test how the responsive interface layout nodes adapt structurally across viewport configurations.
+        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 2rem; align-items: start;">
+            
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                
+                <div>
+                    <label style="font-size: 0.65rem; color: #38bdf8; font-family: 'JetBrains Mono', monospace; display: block; margin-bottom: 0.5rem;">SELECT PROJECT SHELL</label>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <button id="shell-btn-1" onclick="switchProject(1)" style="width: 100%; text-align: left; background: #131719; border: 1px solid #38bdf8; padding: 0.75rem 1rem; border-radius: 6px; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; cursor: pointer; transition: all 0.2s;">01 // Modular Analytics</button>
+                        <button id="shell-btn-2" onclick="switchProject(2)" style="width: 100%; text-align: left; background: #0e1112; border: 1px solid #1c2022; padding: 0.75rem 1rem; border-radius: 6px; color: #9ca3af; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; cursor: pointer; transition: all 0.2s;">02 // Safety Triage Console</button>
+                        <button id="shell-btn-3" onclick="switchProject(3)" style="width: 100%; text-align: left; background: #0e1112; border: 1px solid #1c2022; padding: 0.75rem 1rem; border-radius: 6px; color: #9ca3af; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; cursor: pointer; transition: all 0.2s;">03 // CLI-to-GUI Recovery</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.65rem; color: #38bdf8; font-family: 'JetBrains Mono', monospace; display: block; margin-bottom: 0.5rem;">SIMULATE VIEWPORT MATRIX</label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                        <button id="view-btn-desktop" onclick="setViewport('desktop')" style="background: #38bdf8; border: none; padding: 0.6rem; border-radius: 4px; color: #090b0c; font-weight: bold; font-size: 0.7rem; cursor: pointer;">Desktop Array</button>
+                        <button id="view-btn-mobile" onclick="setViewport('mobile')" style="background: #131719; border: 1px solid #1c2022; padding: 0.6rem; border-radius: 4px; color: #9ca3af; font-size: 0.7rem; cursor: pointer;">Mobile Core</button>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px dashed #1c2022; margin: 0.5rem 0;">
+
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div>
+                        <div id="metric-readout" style="font-size: 1.5rem; font-weight: bold; font-family: 'JetBrains Mono', monospace; color: #fff; margin-bottom: 0.25rem;">0% CLS</div>
+                        <p id="metric-desc" style="font-size: 0.7rem; color: #9ca3af; margin: 0; line-height: 1.4;">Zero Cumulative Layout Shift achieved via fixed-aspect CSS grid containers during background data fetches.</p>
+                    </div>
+                    
+                    <a id="project-action-link" href="case-study-analytics.html" style="display: inline-flex; align-items: center; justify-content: center; background: rgba(56, 189, 248, 0.08); border: 1px dashed #38bdf8; color: #38bdf8; padding: 0.6rem 1rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: bold; text-decoration: none; text-align: center; gap: 8px; transition: all 0.2s;">
+                        Inspect Framework Parameters <span style="font-size: 0.8rem;">⟶</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <div style="background: #090a0b; border: 1px solid #1c2022; border-radius: 8px; padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; height: 320px; box-shadow: inset 0 4px 20px rgba(0,0,0,0.85);">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1c2022; padding-bottom: 0.5rem; font-size: 0.6rem; color: #526065; font-family: 'JetBrains Mono', monospace;">
+                    <div style="display: flex; gap: 4px;">
+                        <span style="width: 4px; height: 4px; background: #e11d48; border-radius: 50%;"></span>
+                        <span style="width: 4px; height: 4px; background: #fbbf24; border-radius: 50%;"></span>
+                        <span style="width: 4px; height: 4px; background: #22c55e; border-radius: 50%;"></span>
+                    </div>
+                    <span id="simulator-url-bar">localhost:3000/analytics_system</span>
+                </div>
+
+                <div id="viewport-canvas-wrapper" style="width: 100%; transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1); margin: auto;">
+                    <div id="live-simulator-content" style="width: 100%;"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    let activeProject = 1;
+    let activeViewport = 'desktop';
+
+    // Matrix Specifications Cache Mapping
+    const specifications = {
+        1: {
+            url: "localhost:3000/analytics_system",
+            metric: "0% CLS",
+            desc: "Zero Cumulative Layout Shift achieved via fixed-aspect CSS grid containers during background data fetches.",
+            targetUrl: "case-study-analytics.html",
+            accent: "#38bdf8",
+            render: (mode) => `
+                <div style="font-family: 'JetBrains Mono', monospace; color: #fff; background: #0e1112; border: 1px solid #222a2d; border-radius: 6px; padding: 0.75rem; font-size: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                    <div style="color: #38bdf8; border-bottom: 1px solid #222a2d; padding-bottom: 3px; font-weight: bold;">● SYSTEM_NODE: ACTIVE</div>
+                    <div style="display: grid; ${mode === 'desktop' ? 'grid-template-columns: 1fr 1.5fr;' : 'grid-template-columns: 1fr;'} gap: 0.5rem;">
+                        <div style="background: #141a1c; border: 1px solid #222a2d; padding: 6px; border-radius: 4px;">
+                            <span style="color: #526065; display:block; margin-bottom:2px;">THREAD UTILIZATION</span>
+                            <strong style="font-size: 0.8rem; color:#fff;">35.4</strong> <span style="color:#38bdf8;">/ 128 CORES</span>
+                        </div>
+                        <div style="background: #141a1c; border: 1px solid #222a2d; padding: 6px; border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <span style="color: #526065; display:block;">TELEMETRY STREAM</span>
+                            <div style="display:flex; align-items: flex-end; gap:2px; height: 16px; margin-top:4px;">
+                                <div style="width:20%; height:40%; background:#38bdf8;"></div>
+                                <div style="width:20%; height:85%; background:#38bdf8;"></div>
+                                <div style="width:20%; height:60%; background:#38bdf8;"></div>
+                                <div style="width:20%; height:100%; background:#38bdf8;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: #090b0c; border: 1px solid #222a2d; padding: 4px 6px; border-radius: 4px; font-size: 0.45rem; color: #22c55e;">
+                        [16:36:51] ASYNCHRONOUS_WIDGET_REFLOW: Layout containment verified.
+                    </div>
+                </div>`
+        },
+        2: {
+            url: "localhost:3000/safety_triage",
+            metric: "-32% TTD",
+            desc: "Reduction in total operational Time-To-Decision via keyboard-driven hotkey bindings and progressive disclosure sheets.",
+            targetUrl: "case-study-safety.html",
+            accent: "#f43f5e",
+            render: (mode) => `
+                <div style="font-family: 'JetBrains Mono', monospace; color: #fff; background: #0f0a0a; border: 1px solid #3d2b2b; border-radius: 6px; padding: 0.75rem; font-size: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #3d2b2b; padding-bottom: 3px; color: #a18f8f;">
+                        <span>WORKSPACE STATUS: OPERATIONAL</span>
+                        <span style="color: #f43f5e;">AVG TTD: 0.00s</span>
+                    </div>
+                    <div style="display: grid; ${mode === 'desktop' ? 'grid-template-columns: 1fr 1.3fr;' : 'grid-template-columns: 1fr;'} gap: 0.5rem;">
+                        <div style="background: #171111; border: 1px solid #3d2b2b; padding: 6px; border-radius: 4px; display:flex; flex-direction:column; gap:4px;">
+                            <span style="color:#f43f5e; font-size:0.45rem; font-weight:bold;">ERGONOMIC KEYS</span>
+                            <div style="display:flex; justify-content:space-between; background:#241a1a; padding:2px 4px; border-radius:2px;"><span>Approve</span><span style="color:#fff; background:#3d2b2b; padding:0 2px;">W</span></div>
+                            <div style="display:flex; justify-content:space-between; background:#241a1a; padding:2px 4px; border-radius:2px;"><span>Escalate</span><span style="color:#fff; background:#3d2b2b; padding:0 2px;">E</span></div>
+                        </div>
+                        <div style="background: #171111; border: 1px solid #3d2b2b; padding: 6px; border-radius: 4px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; min-height: 45px;">
+                            <div style="width: 100%; height: 100%; background: rgba(244,63,94,0.03); filter: blur(2px); position: absolute; top:0; left:0;"></div>
+                            <span style="position: relative; border: 1px solid #f43f5e; padding: 2px 4px; border-radius:3px; font-size:0.45rem; color:#f43f5e; background: #0f0a0a;">MUTED // HOVER TO REVIEW</span>
+                        </div>
+                    </div>
+                </div>`
+        },
+        3: {
+            url: "localhost:3000/recovery_wizard",
+            metric: "100% Safe",
+            desc: "Catastrophic drive overwrite loops completely minimized using client-side partition safety enforcement guardrails.",
+            targetUrl: "case-study-recovery.html",
+            accent: "#d97706",
+            render: (mode) => `
+                <div style="font-family: 'JetBrains Mono', monospace; color: #f4f5f3; background: #0d0e0c; border: 1px solid #2e3329; border-radius: 6px; padding: 0.75rem; font-size: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                    <div style="color: #878e80; border-bottom: 1px solid #2e3329; padding-bottom: 3px; display:flex; justify-content:space-between;">
+                        <span>VOLUME_RECOVERY_ENG // ONLINE</span>
+                        <span style="color: #d97706;">SECURE_MODE</span>
+                    </div>
+                    <div style="display: grid; ${mode === 'desktop' ? 'grid-template-columns: 1fr 1.5fr;' : 'grid-template-columns: 1fr;'} gap: 0.5rem;">
+                        <div style="background: #141612; border: 1px solid #2e3329; padding: 4px; border-radius: 3px; display:flex; flex-direction:column; gap:2px; color:#878e80;">
+                            <span style="color:#d97706; font-weight:bold;">● 01 // Source</span>
+                            <span style="opacity:0.5;">○ 02 // Filters</span>
+                        </div>
+                        <div style="background: #141612; border: 1px solid #2e3329; padding: 6px; border-radius: 3px; display:flex; flex-direction:column; justify-content:space-between; min-height:45px;">
+                            <div>
+                                <div style="font-weight:bold; font-size:0.48rem; margin-bottom:3px;">Select Target Volume</div>
+                                <div style="background:#1d211a; border:1px solid #2e3329; padding:2px 4px; border-radius:2px; font-size:0.42rem; color:#878e80;">External Drive [500GB]</div>
+                            </div>
+                            <div style="text-align:right; margin-top:4px;"><span style="background:#d97706; color:#141612; font-weight:bold; padding:2px 4px; border-radius:2px; font-size:0.42rem;">Continue</span></div>
+                        </div>
+                    </div>
+                </div>`
+        }
+    };
+
+    function updateSimulation() {
+        const spec = specifications[activeProject];
+        const wrapper = document.getElementById('viewport-canvas-wrapper');
+        const content = document.getElementById('live-simulator-content');
+        
+        // Handle Viewport Matrix Width Shifts
+        if (activeViewport === 'mobile') {
+            wrapper.style.maxWidth = "280px";
+        } else {
+            wrapper.style.maxWidth = "100%";
+        }
+
+        // Render Fresh Context Sub-Tree
+        content.innerHTML = spec.render(activeViewport);
+        
+        // Update Static Controls Text Strings & URLs
+        document.getElementById('simulator-url-bar').innerText = spec.url;
+        document.getElementById('metric-readout').innerText = spec.metric;
+        document.getElementById('metric-readout').style.color = spec.accent;
+        document.getElementById('metric-desc').innerText = spec.desc;
+        
+        const actionBtn = document.getElementById('project-action-link');
+        actionBtn.href = spec.targetUrl;
+        actionBtn.style.color = spec.accent;
+        actionBtn.style.borderColor = spec.accent;
+        actionBtn.style.background = `rgba(${hexToRgb(spec.accent)}, 0.06)`;
+    }
+
+    function switchProject(id) {
+        activeProject = id;
+        for (let i = 1; i <= 3; i++) {
+            const btn = document.getElementById(`shell-btn-${i}`);
+            if (i === id) {
+                btn.style.color = "#fff";
+                btn.style.borderColor = specifications[i].accent;
+                btn.style.background = "#131719";
+            } else {
+                btn.style.color = "#9ca3af";
+                btn.style.borderColor = "#1c2022";
+                btn.style.background = "#0e1112";
+            }
+        }
+        updateSimulation();
+    }
+
+    function setViewport(mode) {
+        activeViewport = mode;
+        const deskBtn = document.getElementById('view-btn-desktop');
+        const mobBtn = document.getElementById('view-btn-mobile');
+        const spec = specifications[activeProject];
+
+        if (mode === 'desktop') {
+            deskBtn.style.background = spec.accent;
+            deskBtn.style.color = "#090b0c";
+            deskBtn.style.border = "none";
+            mobBtn.style.background = "#131719";
+            mobBtn.style.color = "#9ca3af";
+            mobBtn.style.border = "1px solid #1c2022";
+        } else {
+            mobBtn.style.background = spec.accent;
+            mobBtn.style.color = "#090b0c";
+            mobBtn.style.border = "none";
+            deskBtn.style.background = "#131719";
+            deskBtn.style.color = "#9ca3af";
+            deskBtn.style.border = "1px solid #1c2022";
+        }
+        updateSimulation();
+    }
+
+    function hexToRgb(hex) {
+        const bigint = parseInt(hex.replace('#', ''), 16);
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
+        return `${r}, ${g}, ${b}`;
+    }
+
+    // Initialize Layout Matrix Instance on Core Runtime Boot
+    document.addEventListener("DOMContentLoaded", () => {
+        updateSimulation();
+    });
+</script>
+    <!-- ========================================== -->
+    <!-- INTERACTIVE LAYOUT SANDBOX END            -->
+    <!-- ========================================== -->
+    <!-- SELECTED CASE STUDIES WRAPPER -->
+    <main id="work">
+        <h2 class="section-title">Selected Case Studies</h2>
+        
+        <div class="project-grid">
+
+            <article class="project-card">
+    
+    <div class="project-mockup-window" style="width: 100%; max-width: 560px; background: #060913; border: 1px solid #1e293b; border-radius: 8px; padding: 1rem; font-family: 'JetBrains Mono', monospace; box-shadow: 0 20px 40px rgba(0,0,0,0.45); overflow: hidden;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 0.75rem; margin-bottom: 1rem; font-size: 0.65rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="width: 6px; height: 6px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
+                <span style="color: #f8fafc; font-weight: bold;">SYSTEM_NODE: ACTIVE</span>
+            </div>
+            <div style="color: #64748b;">16:36:52.715</div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+            
+            <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 1rem;">
+                <div style="background: #0b1120; border: 1px solid #1e293b; border-radius: 4px; padding: 0.75rem;">
+                    <div style="font-size: 0.55rem; color: #64748b; margin-bottom: 0.5rem;">THREAD UTILIZATION</div>
+                    <div style="font-size: 1.2rem; font-weight: bold; color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif;">35.4 <span style="font-size: 0.6rem; color: #64748b; font-family: monospace;">/ 128 CORES</span></div>
+                </div>
+                
+                <div style="background: #0b1120; border: 1px solid #1e293b; border-radius: 4px; padding: 0.75rem; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.55rem; color: #64748b;">
+                        <span>MULTI-REGION FAULT TELEMETRY</span>
+                        <span style="color: #38bdf8;">LIVE</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-end; gap: 3px; height: 30px; margin-top: 0.5rem; padding-bottom: 2px;">
+                        <div style="flex:1; height:30%; background: linear-gradient(to top, #0b1120, #38bdf8); border-radius:1px;"></div>
+                        <div style="flex:1; height:65%; background: linear-gradient(to top, #0b1120, #38bdf8); border-radius:1px;"></div>
+                        <div style="flex:1; height:45%; background: linear-gradient(to top, #0b1120, #38bdf8); border-radius:1px;"></div>
+                        <div style="flex:1; height:85%; background: linear-gradient(to top, #0b1120, #38bdf8); border-radius:1px;"></div>
+                        <div style="flex:1; height:20%; background: linear-gradient(to top, #0b1120, #38bdf8); border-radius:1px;"></div>
+                        <div style="flex:1; height:95%; background: linear-gradient(to top, #0b1120, #38bdf8); border-radius:1px;"></div>
+                        <div style="flex:1; height:55%; background: linear-gradient(to top, #0b1120, #38bdf8); border-radius:1px;"></div>
+                        <div style="flex:1; height:40%; background: linear-gradient(to top, #0b1120, #38bdf8); border-radius:1px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #0b1120; border: 1px solid #1e293b; border-radius: 4px; padding: 0.75rem; font-size: 0.55rem; line-height: 1.5; color: #a1a1aa;">
+                <div style="display: flex; justify-content: space-between; color: #64748b; margin-bottom: 0.5rem; border-bottom: 1px dashed #1e293b; padding-bottom: 0.25rem;">
+                    <span>SYSTEM STANDARD-OUT (STDOUT)</span>
+                    <span style="color: #10b981;">LOG_POOL</span>
+                </div>
+                <div style="color: #f59e0b;"><span style="color: #64748b;">[16:36:50]</span> WARN // High network queue throughput...</div>
+                <div style="color: #34d399;"><span style="color: #64748b;">[16:36:51]</span> GET /api/v1/telemetry/nodes HTTP/1.1 200 OK</div>
+                <div style="color: #38bdf8;"><span style="color: #64748b;">[16:36:52]</span> ASYNC_WIDGET_REFLOW: Layout containment verified.</div>
+            </div>
+
+        </div>
+    </div>
+    <div class="project-content">
+        <div class="project-meta">PROJECT // 01</div>
+        <h3 class="project-title">Modular Analytics Framework</h3>
+        <p class="project-desc">A deep dive into turning dense, complex backend metrics into a configurable grid ecosystem. Designed to mitigate system noise and let users architect their own workspace viewports without cognitive drag.</p>
+        
+        <div class="ux-metrics-box">
+            <strong>Engineering & UX Integration:</strong>
+            <p>Designed a fluid layout paradigm that controls frontend asynchronously-loaded components, eliminating Cumulative Layout Shift ($CLS$) down to zero.</p>
+        </div>
+
+        <div class="tags">
+            <span class="tag">Information Architecture</span>
+            <span class="tag">Data Optimization</span>
+            <span class="tag">Modular UI</span>
+        </div>
+        
+        <a href="case-study-dashboard.html" class="view-case-link">Read full case study ⟶</a>
+    </div>
+</article>
+            <!-- CASE STUDY 2: CONTENT SAFETY MODERATION -->
+            <article class="project-card">
+    
+    <div class="project-mockup-window" style="width: 100%; max-width: 560px; background: #0f0a0a; border: 1px solid #3d2b2b; border-radius: 8px; padding: 1rem; font-family: 'JetBrains Mono', monospace; box-shadow: 0 20px 40px rgba(0,0,0,0.5); overflow: hidden; color: #ffffff;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3d2b2b; padding-bottom: 0.6rem; margin-bottom: 1rem; font-size: 0.65rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="width: 6px; height: 6px; background: #34d399; border-radius: 50%; display: inline-block;"></span>
+                <span style="color: #a18f8f;">WORKSPACE STATUS: OPERATIONAL</span>
+            </div>
+            <div style="color: #f87171; background: rgba(239, 68, 68, 0.1); padding: 2px 6px; border-radius: 3px;">AVG TTD: 0.00s</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 0.75rem;">
+            
+            <div style="background: #171111; border: 1px solid #3d2b2b; border-radius: 4px; padding: 0.6rem; display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.55rem;">
+                <div style="color: #f87171; font-size: 0.5rem; letter-spacing: 0.5px; margin-bottom: 0.2rem;">ERGONOMIC DESIGN</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; background: #241a1a; padding: 4px 6px; border-radius: 2px;">
+                    <span style="color: #a18f8f;">Approve Asset</span>
+                    <span style="background: #3d2b2b; padding: 1px 4px; border-radius: 2px; color: #fff;">W</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; background: #241a1a; padding: 4px 6px; border-radius: 2px;">
+                    <span style="color: #a18f8f;">Escalate Flag</span>
+                    <span style="background: #3d2b2b; padding: 1px 4px; border-radius: 2px; color: #fff;">E</span>
+                </div>
+            </div>
+
+            <div style="background: #171111; border: 1px solid #3d2b2b; border-radius: 4px; padding: 0.6rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.5rem;">
+                
+                <div>
+                    <div style="font-size: 0.5rem; color: #ef4444; font-weight: bold; margin-bottom: 0.1rem;">ANOMALY FLAG // NETWORK THREAT</div>
+                    <div style="font-size: 0.55rem; color: #a18f8f; margin-bottom: 0.4rem;">ID: asset_payload_8842_hx</div>
+                    <div style="font-size: 0.55rem; color: #ffffff; line-height: 1.3; font-family: sans-serif; background: #241a1a; padding: 6px; border-radius: 4px; border-left: 2px solid #ef4444;">
+                        "Inbound string payload sequences execute external buffer overflow parameters..."
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; font-size: 0.5rem; text-align: center;">
+                    <div style="border: 1px solid #3d2b2b; background: #241a1a; padding: 4px 2px; border-radius: 3px; color: #34d399; font-weight: bold;">Approve Clean</div>
+                    <div style="border: 1px solid #ef4444; background: rgba(239, 68, 68, 0.05); padding: 4px 2px; border-radius: 3px; color: #f87171; font-weight: bold;">Escalate Threat</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="project-content">
+        <div class="project-meta">PROJECT // 02</div>
+        <h3 class="project-title">Content Safety Triage Platform</h3>
+        <p class="project-desc">High-velocity dashboard designed intentionally to protect user wellness and maximize decision speed. Built around clean, rapid keyboard shortcut mappings and layered sensory barriers for sensitive media data payloads.</p>
+        
+        <div class="ux-metrics-box">
+            <strong>Interaction Impact:</strong>
+            <p>Minimized interface resistance to reduce overall workflow Time-To-Decision ($TTD$) by 30% while preserving absolute accurate classification metrics.</p>
+        </div>
+
+        <div class="tags">
+            <span class="tag">Keyboard-Driven UX</span>
+            <span class="tag">Workplace Wellness</span>
+            <span class="tag">Triage Interface</span>
+        </div>
+
+        <a href="case-study-safety.html" class="view-case-link">Read full case study ⟶</a>
+    </div>
+</article>
+            <!-- CASE STUDY 3: TERMINAL MIGRATION -->
+            <article class="project-card">
+    
+    <div class="project-mockup-window" style="width: 100%; max-width: 560px; background: #0d0e0c; border: 1px solid #2e3329; border-radius: 8px; padding: 1rem; font-family: 'JetBrains Mono', monospace; box-shadow: 0 20px 40px rgba(0,0,0,0.5); overflow: hidden; color: #f4f5f3;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2e3329; padding-bottom: 0.6rem; margin-bottom: 1rem; font-size: 0.65rem; color: #878e80;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <div style="display: flex; gap: 4px;">
+                    <span style="width: 5px; height: 5px; background: #2e3329; border-radius: 50%; display: inline-block;"></span>
+                    <span style="width: 5px; height: 5px; background: #2e3329; border-radius: 50%; display: inline-block;"></span>
+                    <span style="width: 5px; height: 5px; background: #878e80; border-radius: 50%; display: inline-block;"></span>
+                </div>
+                <span>VOLUME_RECOVERY_ENG // ONLINE</span>
+            </div>
+            <div style="font-size: 0.6rem; letter-spacing: 0.5px;">SECURE_MODE</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1.6fr; gap: 0.75rem;">
+            
+            <div style="background: #141612; border: 1px solid #2e3329; border-radius: 4px; padding: 0.6rem; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.52rem; line-height: 1.4;">
+                <div style="color: #d97706; font-size: 0.48rem; font-weight: bold; letter-spacing: 0.5px; margin-bottom: 0.2rem;">DEFENSIVE ENGINEERING</div>
+                
+                <div style="color: #d97706; font-weight: bold;">● 01 // Source Allocation</div>
+                <div style="color: #878e80; opacity: 0.6;">○ 02 // Extension Filter</div>
+                <div style="color: #878e80; opacity: 0.6;">○ 03 // Target Verification</div>
+                <div style="color: #878e80; opacity: 0.6;">○ 04 // Execution Thread</div>
+            </div>
+
+            <div style="background: #141612; border: 1px solid #2e3329; border-radius: 4px; padding: 0.6rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.75rem;">
+                
+                <div>
+                    <div style="font-size: 0.6rem; font-weight: bold; color: #f4f5f3; margin-bottom: 0.2rem;">Select Affected Target Storage Volume</div>
+                    <div style="font-size: 0.48rem; color: #878e80; margin-bottom: 0.5rem; letter-spacing: 0.3px;">DETECTED HARDWARE VOLUMES</div>
+                    
+                    <div style="background: #1d211a; border: 1px solid #2e3329; padding: 5px 8px; border-radius: 3px; font-size: 0.52rem; color: #f4f5f3; display: flex; justify-content: space-between; align-items: center;">
+                        <span>External Hardware Storage Array [500GB // NTFS]</span>
+                        <span style="color: #878e80; font-size: 0.45rem;">▼</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #2e3329; padding-top: 0.5rem;">
+                    <div style="font-size: 0.5rem; color: #878e80; background: #1d211a; padding: 3px 6px; border-radius: 2px; opacity: 0.5;">Backwards</div>
+                    <div style="font-size: 0.5rem; color: #141612; background: #d97706; font-weight: bold; padding: 3px 8px; border-radius: 2px; box-shadow: 0 2px 4px rgba(217, 119, 6, 0.2);">Continue Step</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="project-content">
+        <div class="project-meta">PROJECT // 03</div>
+        <h3 class="project-title">Terminal GUI Data Recovery Tool</h3>
+        <p class="project-desc">Translating a raw command-line CLI recovery utility into an accessible, stress-free user layout. Mitigates accidental user errors during high-panic data loss events using structural guardrails and simple step paths.</p>
+        
+        <div class="ux-metrics-box">
+            <strong>Design Psychology Approach:</strong>
+            <p>Implemented clear progressive disclosure layers to transition raw volume scanning engines into a straightforward, predictable 4-step wizard.</p>
+        </div>
+
+        <div class="tags">
+            <span class="tag">Progressive Disclosure</span>
+            <span class="tag">Error Prevention</span>
+            <span class="tag">CLI-to-GUI Conversion</span>
+        </div>
+
+        <a href="case-study-recovery.html" class="view-case-link">Read full case study ⟶</a>
+    </div>
+</article>
+
+        </div>
+    </main>
+
+    <!-- STRUCTURAL FOOTER -->
+    <footer>
+     <section id="connect" style="max-width: var(--max-width); margin: 4rem auto 4rem auto; border-top: 1px dashed var(--border); padding-top: 3rem; padding-left: 1rem; padding-right: 1rem;">
+    
+    <div class="connect-grid" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start;">
+        
+        <div class="connect-info" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+            <div>
+                <div class="project-num" style="font-family: var(--font-mono); color: var(--accent-functional); font-size: 0.8rem; letter-spacing: 1.5px; margin-bottom: 1rem; text-transform: uppercase;">
+                    // INITIATE CONTACT
+                </div>
+                <h2 style="font-size: 2.5rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 1.5rem; color: var(--text-main); line-height: 1.1;">
+                    Get in Touch
+                </h2>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 3.5rem; max-width: 440px;">
+                    I am currently open to remote software engineering, data analytics pipeline development, and technical support specialist positions. Let's build something stable.
+                </p>
+            </div>
+            
+            <div class="direct-channels" style="display: flex; flex-direction: column; gap: 1.25rem; font-family: var(--font-mono); font-size: 0.85rem;">
+                <div class="channel-item" style="display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="color: var(--accent-functional); width: 60px; display: inline-block; opacity: 0.8;">EMAIL:</span> 
+                    <a href="mailto:cleopatra.m.ponto@gmail.com" style="color: var(--text-main); text-decoration: none; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 2px; transition: all 0.2s ease;">cleopatra.m.ponto@gmail.com</a>
+                </div>
+                <div class="channel-item" style="display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="color: var(--accent-functional); width: 60px; display: inline-block; opacity: 0.8;">GITHUB:</span> 
+                    <a href="https://github.com/cleo-coder" target="_blank" style="color: var(--text-main); text-decoration: none; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 2px; transition: all 0.2s ease;">github.com/cleo-coder</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="connect-form-container" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 2.5rem;">
+            <form action="https://formspree.io/f/mjgzpbyd" method="POST" class="contact-form" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="form-field" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label class="form-label" style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Identity / Name</label>
+                        <input type="text" name="name" required placeholder="Jane Mercer" class="form-input" style="width: 100%; background: var(--bg-main); border: 1px solid var(--border); border-radius: 4px; padding: 0.75rem 1rem; color: var(--text-main); font-family: var(--font-sans); font-size: 0.9rem; outline: none; transition: border-color 0.2s ease;">
+                    </div>
+                    <div class="form-field" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label class="form-label" style="font-family: var(--font-mono); font-size: 0.7 brass; font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Return Address / Email</label>
+                        <input type="email" name="_replyto" required placeholder="jane@company.com" class="form-input" style="width: 100%; background: var(--bg-main); border: 1px solid var(--border); border-radius: 4px; padding: 0.75rem 1rem; color: var(--text-main); font-family: var(--font-sans); font-size: 0.9rem; outline: none; transition: border-color 0.2s ease;">
+                    </div>
+                </div>
+                
+                <div class="form-field" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <label class="form-label" style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Communications Payload / Message</label>
+                    <textarea name="message" rows="5" required placeholder="Discussing engineering opportunities..." class="form-input" style="width: 100%; background: var(--bg-main); border: 1px solid var(--border); border-radius: 4px; padding: 0.75rem 1rem; color: var(--text-main); font-family: var(--font-sans); font-size: 0.9rem; outline: none; resize: none; transition: border-color 0.2s ease; line-height: 1.5;"></textarea>
+                </div>
+                
+                <div style="display: flex; justify-content: flex-end; margin-top: 0.5rem;">
+                    <button type="submit" class="form-submit-btn" style="background: var(--accent-functional); color: var(--bg-main); border: 1px solid var(--accent-functional); border-radius: 4px; padding: 0.75rem 2rem; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Transmit Message ➔
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer style="margin-top: 8rem; border-top: 1px solid var(--border); padding-top: 2rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; letter-spacing: 0.5px;">
+        <div>© 2026 CLEOPATRA PONTO. ALL RIGHTS RESERVED.</div>
+        <div style="text-transform: uppercase; opacity: 0.8;">DESIGNED WITH INTENT.</div>
+    </footer>
+
+    <style>
+        .form-input:focus { border-color: var(--accent-functional) !important; }
+        .form-submit-btn:hover { background: transparent !important; color: var(--accent-functional) !important; }
+        .channel-item a:hover { color: var(--accent-functional) !important; border-bottom-color: var(--accent-functional) !important; }
+        
+        @media (max-width: 968px) {
+            .connect-grid { grid-template-columns: 1fr !important; gap: 3.5rem !important; }
+            .connect-info { margin-bottom: 1rem; }
+            .form-row { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+        }
+    </style>
+</section>
+    </footer>
+
+</body>
+</html>
