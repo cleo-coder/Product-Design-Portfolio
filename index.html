@@ -368,13 +368,13 @@
     let activeProject = 1;
     let activeViewport = 'desktop';
 
-    // Matrix Specifications Cache Mapping
+    // Matrix Specifications Cache Mapping with Live GitHub Pages URLs
     const specifications = {
         1: {
-            url: "localhost:3000/analytics_system",
+            url: "cleo-coder.github.io/modular-analytics-dashboard",
             metric: "0% CLS",
             desc: "Zero Cumulative Layout Shift achieved via fixed-aspect CSS grid containers during background data fetches.",
-            targetUrl: "case-study-analytics.html",
+            targetUrl: "https://cleo-coder.github.io/modular-analytics-dashboard/",
             accent: "#38bdf8",
             render: (mode) => `
                 <div style="font-family: 'JetBrains Mono', monospace; color: #fff; background: #0e1112; border: 1px solid #222a2d; border-radius: 6px; padding: 0.75rem; font-size: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
@@ -400,10 +400,10 @@
                 </div>`
         },
         2: {
-            url: "localhost:3000/safety_triage",
+            url: "cleo-coder.github.io/content-safety-triage-console",
             metric: "-32% TTD",
             desc: "Reduction in total operational Time-To-Decision via keyboard-driven hotkey bindings and progressive disclosure sheets.",
-            targetUrl: "case-study-safety.html",
+            targetUrl: "https://cleo-coder.github.io/content-safety-triage-console/",
             accent: "#f43f5e",
             render: (mode) => `
                 <div style="font-family: 'JetBrains Mono', monospace; color: #fff; background: #0f0a0a; border: 1px solid #3d2b2b; border-radius: 6px; padding: 0.75rem; font-size: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
@@ -425,10 +425,10 @@
                 </div>`
         },
         3: {
-            url: "localhost:3000/recovery_wizard",
+            url: "cleo-coder.github.io/cli-to-gui-recovery-wizard",
             metric: "100% Safe",
             desc: "Catastrophic drive overwrite loops completely minimized using client-side partition safety enforcement guardrails.",
-            targetUrl: "case-study-recovery.html",
+            targetUrl: "https://cleo-coder.github.io/cli-to-gui-recovery-wizard/",
             accent: "#d97706",
             render: (mode) => `
                 <div style="font-family: 'JetBrains Mono', monospace; color: #f4f5f3; background: #0d0e0c; border: 1px solid #2e3329; border-radius: 6px; padding: 0.75rem; font-size: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
@@ -474,11 +474,14 @@
         document.getElementById('metric-readout').style.color = spec.accent;
         document.getElementById('metric-desc').innerText = spec.desc;
         
+        // Dynamic Anchor Configuration
         const actionBtn = document.getElementById('project-action-link');
         actionBtn.href = spec.targetUrl;
+        actionBtn.target = "_blank"; // Open clean in a new browser tab
         actionBtn.style.color = spec.accent;
         actionBtn.style.borderColor = spec.accent;
         actionBtn.style.background = `rgba(${hexToRgb(spec.accent)}, 0.06)`;
+        actionBtn.innerHTML = `Launch Live Production Tool <span style="font-size: 0.8rem;">↗</span>`;
     }
 
     function switchProject(id) {
